@@ -69,29 +69,8 @@ class ROI_calculator():
         self._calc_cash_on_cash_roi()
 
 
-# This does executes the CLI ROI
-def calculate_roi():
-    print('Welcome to my ROI Calculator! Good luck on your investment!')
-    calculator = ROI_calculator()
-    calculator.create_property()
-    while True:
-        desire = input(f'Would you like to edit your current calculation, start a new cacluation, or quit? (E/S/Q)')
-        while desire[0].lower() not in {'e','s','q'}:
-            desire = input(f'That was not a valid input.  Would you like to edit your current calculation, start a new cacluation, or quit? Use only E, S, or Q)')
-        if desire[0].lower() == 'e':
-            calculator.edit_property()
-        elif desire[0].lower() == 's':
-            calculator.create_property()
-        elif desire[0].lower() == 'q':
-            print('Thank you for using my calculator!  Goodbye!')
-            break
-        else:
-            print('SOMETHING WENT VERY WRONG!')
-            break
-
-
-
-
+# NORMAL TEXT SIZE! I AM SICK OF ADJUSTING EACH BY HAND! 
+nt = 14
 
 def tab2(calculator):
 
@@ -101,7 +80,7 @@ def tab2(calculator):
         tab1(calculator)
 
     frame2 = tk.Frame(root)
-    frame2.pack()
+    frame2.pack(padx=20, pady=20)
 
     label2 = tk.Label(frame2,text='Your ROI is:', font = ('Times',25))
     label2.grid(row=0, column=0)
@@ -112,30 +91,23 @@ def tab2(calculator):
     detail_frame.grid(row=2,column=0)
     income = tk.Label(detail_frame, text = 'Monthly Income:')
     income.grid(row = 0, column = 0)
-    income_tot = tk.Label(detail_frame, text = f'{calculator.property.income}', font=('Times', 14))
+    income_tot = tk.Label(detail_frame, text = f'${calculator.property.income}', font=('Times', nt))
     income_tot.grid(row=1,column=0)
 
     costs = tk.Label(detail_frame, text = 'Monthly Costs:')
     costs.grid(row = 0, column = 2)
-    income_tot = tk.Label(detail_frame, text = f'{calculator.tot_expense}', font=('Times', 14))
+    income_tot = tk.Label(detail_frame, text = f'-${calculator.tot_expense}', font=('Times', nt))
     income_tot.grid(row=1,column=2)
 
-    takehome = tk.Label(detail_frame, text = 'Monthly Costs:')
+    takehome = tk.Label(detail_frame, text = 'Monthly Net:')
     takehome.grid(row = 0, column = 3)
-    takehome_tot = tk.Label(detail_frame, text = f'{calculator.montly_cashflow}', font=('Times', 14))
+    takehome_tot = tk.Label(detail_frame, text = f'${calculator.montly_cashflow}', font=('Times', nt))
     takehome_tot.grid(row=1,column=3)
 
 
 
     but2 = tk.Button(frame2, text='Edit', font = ('Times',20, 'bold', 'italic'), command =back)
     but2.grid(row=3, column=0)
-
-# NORMAL TEXT SIZE! I AM SICK OF ADJUSTING EACH BY HAND! 
-nt = 14
-
-# THIS IS HOW I EDITED THE TEXTBOXES ON THE BLACKJACK APP! p1_cards WAS A BOXES NAME!
-# p1_cards.delete(1.0,"end")
-# p1_cards.insert(1.0, p1_box)
 
 def tab1(defaults=None):
 
@@ -214,9 +186,9 @@ def tab1(defaults=None):
     but1.grid(row=3, column=0)
 
 
+# Runs the Tkinter app!
 root = tk.Tk()
 root.title('ROI Calculator')
-# root.minsize(height = 500, width = 900)
 
 tab1()
 
